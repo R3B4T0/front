@@ -1,0 +1,15 @@
+<div class="container marketing">
+    <div class="row">
+        <!-- aquí se haría el for de músicos !-->
+        <div *ngFor="let musico of usuarios">
+            <div class="col-lg-4">
+                <img class="rounded-circle" src="assets/imagenes/{{ musico.foto }}" alt="Generic placeholder image" width="140" height="140">
+                <h2>{{ musico.nombre }} {{ musico.apellidos }}</h2>
+                <p><a class="btn btn-primary" href="{{ path('ver_perfil',{id:musico.id}) }}" role="button">Ver perfil</a></p>
+            </div>
+        </div>
+        <!-- aquí vendría el else -->
+            <p>No se ha encontrado ningún músico.</p>
+        <!-- aquí acabaría el for-->
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="container marketing">
+    <div class="row">
+        <!-- aquí se haría el for de bandas !-->
+        <div *ngFor="let banda of usuarios">
+            <div class="col-lg-4">
+                <img class="rounded-circle" src="assets/images/{{ banda.foto }}" alt="Generic placeholder image" width="140" height="140">
+                <h2>{{ banda.nombre }} {{ banda.apellidos }}</h2>
+                <p><a class="btn btn-primary" (click)="verPerfil(banda.id)" role="button">Ver perfil</a></p>
+            </div>
+        </div>
+        <!-- aquí se haría el else -->
+        <div>
+            <p>No se ha encontrado ninguna banda.</p>
+        </div>
+        <!-- aquí terminaría el for -->
+    </div>
+</div>
