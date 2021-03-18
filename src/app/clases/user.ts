@@ -6,6 +6,7 @@ export interface User {
     password?: string
     telefono?: string
     foto?: string
+    datosInteres?: Text
 }
 
 

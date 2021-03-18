@@ -15,6 +15,7 @@ import { LoginComponent } from './componentes/auth/login/login.component';
 import { RegisterComponent } from './componentes/auth/register/register.component';
 import { VerPerfilComponent } from './componentes/ver-perfil/ver-perfil.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EnviarTokenInterceptor } from './auth/enviar-token.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,9 +36,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [
-    {provide: LOCALE_ID, useValue:"es"}
-  ],
+  providers: [{provide:LOCALE_ID, useValue:"es"}, {provide: HTTP_INTERCEPTORS, useClass:EnviarTokenInterceptor, multi:true}]
+  ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

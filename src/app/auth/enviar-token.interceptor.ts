@@ -18,18 +18,17 @@ export class EnviarTokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     let peticion = request;
+    
     if (this.servicioUsuario.isLogged()) {
       peticion = request.clone({
         setHeaders: {Authorization: this.servicioUsuario.leerToken()}
       })
     }
+
     return next.handle(peticion).pipe(
       catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
-          this.servicioUsuario.logOut()
           this.irHacia.navigate(['/login'])
-        } else if (err.status === 403) {
-          this.irHacia.navigate([''])
         }
         return throwError(err)
       })

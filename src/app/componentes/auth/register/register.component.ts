@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/clases/user';
 import { UserService } from 'src/app/servicios/user.service';
 
 @Component({
@@ -22,6 +23,7 @@ export class RegisterComponent implements OnInit {
   tiempo: number = 7
   creado: Boolean = false
   mensaje: string = ''
+  perfil: User = {}
   constructor(private fb:FormBuilder, private servicioUsuario:UserService, private irHacia:Router, private cd:ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -32,8 +34,8 @@ export class RegisterComponent implements OnInit {
       this.servicioUsuario.registrar(this.formRegister.value).subscribe(
         respuesta => {
           console.log(respuesta)
-          this.servicioUsuario.guardarToken(respuesta)
           this.creado = true
+          this.irHacia.navigate(['/login'])
           this.contador()
           setTimeout(() => this.creado = false, 6000)
         },
@@ -45,6 +47,20 @@ export class RegisterComponent implements OnInit {
     } else {
       alert('Las contraseñas no coinciden')
     }
+  }
+
+  hacerLogin(): void {
+    this.servicioUsuario.acceso(this.formRegister.value).subscribe(
+      respuesta => {
+        console.log(respuesta)
+        this.servicioUsuario.guardarToken(respuesta.token);
+        this.irHacia.navigate(['/perfil'])
+      },
+      error => {
+        console.log(error)
+        this.mensaje = error.error.error
+      }
+    )
   }
 
   contador(): void{

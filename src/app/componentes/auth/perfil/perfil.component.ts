@@ -28,11 +28,21 @@ export class PerfilComponent implements OnInit {
   constructor(private servicioUsuario:UserService, private fb:FormBuilder, private irHacia:Router) { }
 
   ngOnInit(): void {
-    this.cargarPerfil()
+    this.getUsuario()
   }
 
   fnLogged(): boolean {
     return this.servicioUsuario.isLogged()
+  }
+
+  getUsuario() {
+    this.servicioUsuario.obtenerPerfil().subscribe(
+      respuesta => {
+        console.log(respuesta)
+        this.perfil = respuesta
+      },
+      error => console.log(error)
+    )
   }
 
   cargarPerfil(): void {

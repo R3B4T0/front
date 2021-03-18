@@ -15,24 +15,24 @@
                                 <h1>Login</h1>
                             </div>
                         </div>
-                        <form method="POST">
+                        <form [formGroup]='formLogin' (submit)="login()">
                             <!-- if error -->
                                 <!-- <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div> -->
                             <!-- fin de if -->
                             <!-- if usuario logueado -->
-                            <ng-template [ngIf]='!fnLogged()'>
+                            <!-- <ng-template [ngIf]='!fnLogged()'>
                                 <div class="mb-3">
                                     You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
                                 </div>
-                            </ng-template>
+                            </ng-template>-->
                             <!-- fin de if -->
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Email</label>
-                                <!-- <input type="email" name="email" value="{{ last_username }}" class="form-control" id="email" placeholder="Introduzca Email"> -->
+                                <input type="email" name="email" formControlName="email" class="form-control" id="email" placeholder="Introduzca Email">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Contraseña</label>
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Introduzca Contraseña">
+                                <input type="password" name="password" formControlName="password" id="password" class="form-control" placeholder="Introduzca Contraseña">
                             </div>
                             <!-- <input type="hidden" name="_csrf_token"
                                 value="{{ csrf_token('authenticate') }}"

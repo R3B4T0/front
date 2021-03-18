@@ -27,11 +27,11 @@ export class UserService {
   }
 
   acceso(usuario: accesoUsuario): Observable<any> {
-    return this.http.post(url + 'login/', usuario)
+    return this.http.post(url + 'login', usuario)
   }
 
   obtenerPerfil(): Observable<any> {
-    return this.http.get(url)
+    return this.http.get(url + 'perfil')
   }
 
   editarPerfil(usuario: User): Observable<any> {
