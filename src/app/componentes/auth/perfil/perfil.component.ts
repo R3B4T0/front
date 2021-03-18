@@ -25,6 +25,9 @@ export class PerfilComponent implements OnInit {
   formImagen = this.fb.group({
     imagen: ['', Validators.required]
   })
+  formVideo = this.fb.group({
+    codigo: ['', Validators.required]
+  })
   constructor(private servicioUsuario:UserService, private fb:FormBuilder, private irHacia:Router) { }
 
   ngOnInit(): void {
@@ -40,6 +43,15 @@ export class PerfilComponent implements OnInit {
       respuesta => {
         console.log(respuesta)
         this.perfil = respuesta
+      },
+      error => console.log(error)
+    )
+  }
+
+  insertarVideo(): void {
+    this.servicioUsuario.insertarVideo(this.formVideo.value).subscribe(
+      respuesta => {
+        console.log(respuesta)
       },
       error => console.log(error)
     )

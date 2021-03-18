@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { accesoUsuario, User } from '../clases/user';
+import { Video } from '../clases/video';
 const url = 'http://localhost:8000/api/'
 
 @Injectable({
@@ -35,7 +36,7 @@ export class UserService {
   }
 
   editarPerfil(usuario: User): Observable<any> {
-    return this.http.put(url, usuario)
+    return this.http.put(url + "usuario", usuario)
   }
 
   eliminarPerfil(): Observable<any> {
@@ -60,5 +61,9 @@ export class UserService {
 
   leerToken(): string {
     return localStorage.getItem('userToken')
+  }
+
+  insertarVideo(video: Video): Observable<any> {
+    return this.http.post(url + "video", video)
   }
 }

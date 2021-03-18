@@ -7,18 +7,17 @@
         <h4 class="card-title">Datos de Interés</h4>
         <p class="card-text">{{ perfil.datosInteres }}</p>
         <h4 class="card-title">Videos</h4>
-        <!-- for de vídeos
+        <form [formGroup]="formVideo" (submit)="insertarVideo()">
+            <label>Insertar video:</label>
+            <input type="text" formControlName="codigo" class="form-control">
+            <button class="btn btn-primary">Insertar</button>
+        </form>
+        <!-- for de vídeos -->
+        <ng-template *ngFor="let video of videos">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video.codigo }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        else de vídeos -->
-            <p class="card-text">No hay vídeos subidos.</p>
-        <!-- fin de for vídeos-->
-        <!-- if (usuario logueado) -->
-        <ng-template [ngIf]='!fnLogged()'>
-            <!-- if (si el id de usuario e id de usuario logueado son iguales)
-                <a href="{{ path('insertar_video', {id:perfil.id}) }}" class="btn btn-primary" role="button">Insertar Video</a>
-             fin de if -->
         </ng-template>
-        <!-- fin de if -->
+        <!-- else de vídeos -->
+        <!-- fin de for vídeos-->
     </div>
     <!-- if (usuario logueado) -->
     <div class="card-footer">
