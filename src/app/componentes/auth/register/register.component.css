@@ -31,7 +31,11 @@
     color: #fff;
 }
 
-body 
-{
-    background-color: #9CB6D9;
+.btn {
+    border-radius: 1.5rem;
+}
+
+body {
+    height: 1080px;
+    background-color:rgba(156, 182, 217, 0.76);
 }

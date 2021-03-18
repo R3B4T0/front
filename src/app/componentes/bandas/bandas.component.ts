@@ -11,15 +11,15 @@ export class BandasComponent implements OnInit {
 
   constructor(private servicios:UserService, private irHacia:Router) { }
 
-  usuarios: any[] = []
+  bandas: any[] = []
 
   ngOnInit(): void {
-    this.obtenerUsuarios()
+    this.obtenerBandas()
   }
 
-  obtenerUsuarios(): void {
-    this.servicios.obtenerUsuarios().subscribe(
-      respuesta => this.usuarios = respuesta,
+  obtenerBandas(): void {
+    this.servicios.obtenerBandas().subscribe(
+      respuesta => this.bandas = respuesta,
       error => console.log(error)
     );
   }

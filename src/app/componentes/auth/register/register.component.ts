@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/servicios/user.service';
 
 @Component({
   selector: 'app-register',
@@ -6,10 +9,51 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
-  constructor() { }
+  formRegister = this.fb.group({
+    nombre:['', [Validators.required]],
+    apellidos:[''],
+    password:['', [Validators.required, Validators.minLength(4)]],
+    password2:['', [Validators.required]],
+    email:['', [Validators.required, Validators.email]],
+    telefono:[undefined],
+    role:['', [Validators.required]],
+    foto:['', [Validators.required]]
+  })
+  tiempo: number = 7
+  creado: Boolean = false
+  mensaje: string = ''
+  constructor(private fb:FormBuilder, private servicioUsuario:UserService, private irHacia:Router, private cd:ChangeDetectorRef) { }
 
   ngOnInit(): void {
+  }
+
+  submit(): void{
+    if (this.formRegister.value.password = this.formRegister.value.password2) {
+      this.servicioUsuario.registrar(this.formRegister.value).subscribe(
+        respuesta => {
+          console.log(respuesta)
+          this.servicioUsuario.guardarToken(respuesta)
+          this.creado = true
+          this.contador()
+          setTimeout(() => this.creado = false, 6000)
+        },
+        error => {
+          console.log(error)
+          this.mensaje = error.error.error
+        }
+      )
+    } else {
+      alert('Las contraseñas no coinciden')
+    }
+  }
+
+  contador(): void{
+    if(this.tiempo == 1){
+      this.irHacia.navigate(['/perfil'])
+    } else {
+      this.tiempo = this.tiempo - 1
+      setTimeout(() => this.contador(), 1000)
+    }
   }
 
 }

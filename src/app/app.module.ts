@@ -14,6 +14,7 @@ import { PerfilComponent } from './componentes/auth/perfil/perfil.component';
 import { LoginComponent } from './componentes/auth/login/login.component';
 import { RegisterComponent } from './componentes/auth/register/register.component';
 import { VerPerfilComponent } from './componentes/ver-perfil/ver-perfil.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,8 @@ import { VerPerfilComponent } from './componentes/ver-perfil/ver-perfil.componen
     VerPerfilComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule

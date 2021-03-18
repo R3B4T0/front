@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/servicios/user.service';
 
 @Component({
@@ -8,17 +9,22 @@ import { UserService } from 'src/app/servicios/user.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private servicios:UserService) { }
+  constructor(private servicios:UserService, private irHacia:Router) { }
 
-  usuarios: any[] = []
+  musicos: any[] = []
 
   ngOnInit(): void {
+    this.obtenerUsuarios()
   }
 
   obtenerUsuarios(): void {
     this.servicios.obtenerUsuarios().subscribe(
-      respuesta => this.usuarios = respuesta,
+      respuesta => this.musicos = respuesta,
       error => console.log(error)
     );
+  }
+
+  verPerfil(id): void {
+    this.irHacia.navigate(['verPerfil/' + id])
   }
 }

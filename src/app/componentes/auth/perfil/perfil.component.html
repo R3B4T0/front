@@ -1,11 +1,11 @@
 <div class="card">
     <div class="card-header" style="text-align: center">
-        <!-- <img class="rounded-circle" src="assets/images/{{ perfil.foto }}" alt="Generic placeholder image" width="140" height="140">
-        <h2 style="padding-top: 10px">{{ perfil.nombre }} {{ perfil.apellidos }}</h2> -->
+        <img class="rounded-circle" src="assets/images/{{ perfil.foto }}" alt="Generic placeholder image" width="140" height="140">
+        <h2 style="padding-top: 10px">{{ perfil.nombre }} {{ perfil.apellidos }}</h2>
     </div>
     <div class="card-body">
         <h4 class="card-title">Datos de Interés</h4>
-        <p class="card-text"><!-- {{ perfil.DatosInteres }} --></p>
+        <p class="card-text">{{ perfil.DatosInteres }}</p>
         <h4 class="card-title">Videos</h4>
         <!-- for de vídeos
             <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video.codigo }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -21,13 +21,81 @@
         <!-- fin de if -->
     </div>
     <!-- if (usuario logueado) -->
-    <ng-template [ngIf]='!fnLogged()'>
-        <!-- if (id usuario logueado == id usuario)
-            <div class="card-footer">
-                <a href="{{ path('editar_perfil',{id:perfil.id}) }}" class="btn btn-primary btn-block" role="button">Editar Perfil</a>
-                <a href="" class="btn btn-danger btn-block" role="button">Eliminar Perfil</a>
-            </div>
-         fin de if -->
-    </ng-template>
+    <div class="card-footer">
+        <button class="btn btn-primary btn-block" (click)='mostrarEditar=!mostrarEditar'>Editar Perfil</button>
+        <button class="btn btn-danger btn-block" (click)='mostrarEliminar=!mostrarEliminar'>Eliminar Perfil</button>
+    </div>
     <!-- fin de if -->
+    <!-- formulario de editar perfil -->
+    <div class="row" *ngIf='mostrarEditar'>
+        <div class="col-12">
+            <hr>
+            <form [formGroup]="formPerfil" (submit)="editarPerfil()">
+                <div class="form-row mb-1">
+                    <div class="form-group col-md-3 offset-md-2">
+                        <label for="nombre">Nombre:</label>
+                        <input class="form-control" type="text" placeholder="Nombre" id="nombre" formControlName="nombre">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="apellidos">Apellidos:</label>
+                        <input class="form-control" type="text" placeholder="Apellidos" id="apellidos" formControlName="apellidos">
+                    </div>
+                </div>
+                <div class="form-row mb-1">
+                    <div class="form-group col-md-2 offset-md-2">
+                        <label for="telefono">Teléfono:</label>
+                        <input class="form-control" type="number" placeholder="Teléfono" id="telefono" formControlName="telefono">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="email">E-Mail:</label>
+                        <input class="form-control" type="text" placeholder="E-Mail" id="email" formControlName="email">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="password">Contraseña:</label>
+                        <input class="form-control" type="password" placeholder="Contraseña" id="password" formControlName="password">
+                    </div>
+                </div>
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-8 offset-md-2">
+                        <label for="datosInteres">Datos de Interés:</label>
+                        <textarea class="form-control" placeholder="Escriba todos los datos que le resulten de utilidad..." formControlName="datosInteres"></textarea>
+                    </div>
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf='mensaje'>
+                    <strong>{{mensaje}}</strong>
+                </div>
+                <div class="btn-group btn-block">
+                    <button class="btn btn-primary" type ="submit" [disabled]="!formPerfil.valid">Guardar cambios</button>
+                    <button class="btn btn-success" (click)='mostrarEditar=!mostrarEditar'>Cancelar</button>
+                </div>
+            </form>
+            <hr>
+            <form [formGroup]='formImagen' (ngSubmit)='subirImagen()'>
+                <label>Actualizar Imagen:</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="inputF1" formControlName='imagen' (change)='cambiaImagen($event)'>
+                        <label class="custom-file-label" for="inputF1">Elegir Archivo</label>
+                    </div>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type='submit'>Actualizar imagen</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- fin de formulario -->
+    <!-- formulario para eliminar perfil -->
+    <div class="row" *ngIf="mostrarEliminar">
+        <div class="col-12">
+            <hr>
+            <label for="txt-elimina">Para eliminar el usuario introduce el email</label>
+            <input id="txt-elimina" class="form-control" type='text' [(ngModel)]='inputBorrar' placeholder="E-Mail">
+            <br>
+            <div class="btn-group btn-block">
+                <button class="btn btn-success" (click)='mostrarEliminar=!mostrarEliminar; inputBorrar=""'>Cancelar</button>
+                <button class="btn btn-danger" (click)='eliminarUsuario()' [disabled]='inputBorrar!=perfil.email'>Eliminar</button>
+            </div>
+        </div>
+    </div>
 </div>

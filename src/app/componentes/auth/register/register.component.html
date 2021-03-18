@@ -1,21 +1,91 @@
-<head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-</head>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    </head>
 
-<body>
-    <div class="container">
-        <div class="form">
-            <div class="note">
-                <img src="assets/images/navegacion.png">
+    <body>
+        <div class="container">
+            <div class="form">
+                <div class="note">
+                    <img src="assets/images/navegacion.png">
+                </div>
+
+                <form [formGroup]="formRegister" (submit)="submit()">
+                    <div class="form-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre..." id="nombre" required value="" />                   
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" formControlName="email" placeholder="Email..." id="email" required value="" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" formControlName="apellidos" placeholder="Apellidos..." id="apellidos" value="" />                   
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" class="form-control" formControlName="foto" placeholder="Seleccione foto..." id="foto" required value="" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" formControlName="password" placeholder="Contraseña..." id="password" required value="" />                   
+                                </div>
+                                <div class="form-group">
+                                    <label>Escoge un rol:</label>
+                                    <select name="role" id="role" class="form-control" formControlName="role" required>
+                                        <option value='ROLE_MUSICO'>Músico</option>
+                                        <option value='ROLE_BANDA'>Banda</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="password" class="form-control" formControlName="password2" placeholder="Repita contraseña..." id="password2" required value="" />                   
+                                </div>
+                                <div class="form-group">
+                                    <br>
+                                    <input type="text" class="form-control" formControlName="telefono" placeholder="Teléfono..." id="telefono" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-block" type="submit" [disabled]="!formRegister.valid">Registrar</button>
+                    </div>
+                </form>
             </div>
-
-            <div class="form-content">
-                <div class="row">
-                    <!-- formulario de registro -->
+        </div>
+        <div class="container">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header">Estado del formulario</div>
+                <div class="card-body">
+                    <div class="alert alert-success m-n2" role="alert" *ngIf="formRegister.untouched">
+                        <strong>Introduce los valores en el Formulario</strong>
+                    </div>
+                    <div class="alert alert-danger m-n2" role="alert" *ngIf="mensaje && !formRegister.untouched && !creado && formRegister.valid">
+                        <strong>{{mensaje}}</strong>
+                    </div>
+                    <div class="alert alert-success m-n2" role="alert" *ngIf='creado'>
+                        <strong>Usuario creado correctamente. Se le redirigirá en {{tiempo}}</strong>
+                    </div>
+                    <div class="alert alert-danger m-n2" role="alert" *ngIf="formRegister.invalid && formRegister.touched">
+                        <p>Nombre: {{formRegister.get('nombre').errors | json}}</p>
+                        <p>Apellidos: {{formRegister.get('apellidos').errors | json}}</p>
+                        <p>Teléfono: {{formRegister.get('telefono').errors | json}}</p>
+                        <p>E-Mail: {{formRegister.get('email').errors | json}}</p>
+                        <p>Contraseña: {{formRegister.get('password').errors | json}}</p>
+                    </div>
+                    <div class="alert alert-success m-n2" role="alert" *ngIf="formRegister.valid && !mensaje">
+                        <strong>El formulario es valido</strong>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</body>
+        </div>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </body>
+</html>

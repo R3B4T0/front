@@ -14,12 +14,16 @@ export class UserService {
     return this.http.get(url + "usuarios")
   }
 
-  verPerfil(id): Observable<any>{
+  verPerfil(id): Observable<any> {
     return this.http.get(url + "usuario/" + id)
   }
 
+  obtenerBandas(): Observable<any> {
+    return this.http.get(url + "bandas")
+  }
+
   registrar(usuario: User): Observable<any> {
-    return this.http.post(url, usuario)
+    return this.http.post(url + "usuario", usuario)
   }
 
   acceso(usuario: accesoUsuario): Observable<any> {

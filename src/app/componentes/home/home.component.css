@@ -20,10 +20,6 @@ div {
     display: block;
 }
 
-body {
-    background-color:rgba(156, 182, 217, 0.76);
-}
-
 *, ::after, ::before {
     box-sizing: border-box;
 }
