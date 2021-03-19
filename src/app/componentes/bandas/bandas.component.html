@@ -1,13 +1,15 @@
 <div class="container marketing">
     <div class="row">
         <!-- aquí se haría el for de bandas !-->
-        <div *ngFor="let banda of bandas; else vacio">
-            <div class="col-lg-4">
-                <img class="rounded-circle" src="assets/images/{{ banda.foto }}" alt="Generic placeholder image" width="140" height="140">
-                <h2>{{ banda.nombre }} {{ banda.apellidos }}</h2>
-                <p><a class="btn btn-primary" (click)="verPerfil(banda.id)" role="button">Ver perfil</a></p>
+        <ng-container *ngIf="bandas; else vacio">
+            <div *ngFor="let banda of bandas">
+                <div class="col-lg-4">
+                    <img class="rounded-circle" src="assets/images/{{ banda.foto }}" alt="Generic placeholder image" width="140" height="140">
+                    <h2>{{ banda.nombre }} {{ banda.apellidos }}</h2>
+                    <p><a class="btn btn-primary" (click)="verPerfil(banda.id)" role="button">Ver perfil</a></p>
+                </div>
             </div>
-        </div>
+        </ng-container>
         <!-- aquí se haría el else -->
         <ng-template #vacio>
             <p>No se ha encontrado ninguna banda.</p>

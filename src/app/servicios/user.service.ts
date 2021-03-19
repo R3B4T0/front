@@ -64,6 +64,6 @@ export class UserService {
   }
 
   insertarVideo(video: Video): Observable<any> {
-    return this.http.post(url + "video", video)
+    return this.http.post(url + "insertar/video", video)
   }
 }

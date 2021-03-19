@@ -5,29 +5,7 @@
     </div>
     <div class="card-body">
         <h4 class="card-title">Datos de Interés</h4>
-        <p class="card-text"></p>
+        <p class="card-text">{{ user.datosInteres }}</p>
         <h4 class="card-title">Videos</h4>
-        <!-- for de vídeos
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ video.codigo }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        else de vídeos -->
-            <p class="card-text">No hay vídeos subidos.</p>
-        <!-- fin de for vídeos-->
-        <!-- if (usuario logueado) -->
-        <ng-template [ngIf]='!fnLogged()'>
-            <!-- if (si el id de usuario e id de usuario logueado son iguales)
-                <a href="{{ path('insertar_video', {id:perfil.id}) }}" class="btn btn-primary" role="button">Insertar Video</a>
-             fin de if -->
-        </ng-template>
-        <!-- fin de if -->
     </div>
-    <!-- if (usuario logueado) -->
-    <ng-template [ngIf]='!fnLogged()'>
-        <!-- if (id usuario logueado == id usuario)
-            <div class="card-footer">
-                <a href="{{ path('editar_perfil',{id:perfil.id}) }}" class="btn btn-primary btn-block" role="button">Editar Perfil</a>
-                <a href="" class="btn btn-danger btn-block" role="button">Eliminar Perfil</a>
-            </div>
-         fin de if -->
-    </ng-template>
-    <!-- fin de if -->
 </div>

@@ -4,7 +4,7 @@
         <ng-container *ngIf="musicos; else vacio">
             <ng-container *ngFor="let musico of musicos">
                 <div class="col-lg-4">
-                    <img class="rounded-circle" src="assets/imagenes/{{ musico.foto }}" alt="Generic placeholder image" width="140" height="140">
+                    <img class="rounded-circle" src="assets/images/{{ musico.foto }}" alt="Generic placeholder image" width="140" height="140">
                     <h2>{{ musico.nombre }} {{ musico.apellidos }}</h2>
                     <p><a class="btn btn-primary" (click)="verPerfil(musico.id)" role="button">Ver perfil</a></p>
                 </div>
