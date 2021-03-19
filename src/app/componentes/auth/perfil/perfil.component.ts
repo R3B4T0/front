@@ -69,7 +69,14 @@ export class PerfilComponent implements OnInit {
   }
 
   editarPerfil(): void {
-    this.servicioUsuario.editarPerfil(this.formPerfil.value).subscribe(
+    const user: User = {}
+    user.nombre = this.formPerfil.get('nombre').value
+    user.apellidos = this.formPerfil.get('apellidos').value
+    user.datosInteres = this.formPerfil.get('datosInteres').value
+    user.email = this.formPerfil.get('email').value
+    user.password = this.formPerfil.get('password').value
+    user.telefono = this.formPerfil.get('telefono').value
+    this.servicioUsuario.editarPerfil(user).subscribe(
       respuesta => {
         console.log(respuesta)
         this.cargarPerfil()
